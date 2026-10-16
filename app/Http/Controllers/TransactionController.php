@@ -11,7 +11,7 @@ class TransactionController extends Controller
         $transactions = auth()->user()->transactions()->latest()->paginate(10);
         $totalIncome = auth()->user()->transactions()->where('type', 'income')->sum('amount');
         $totalExpense = auth()->user()->transactions()->where('type', 'expense')->sum('amount');
-        $netBalance = $totalIncome - $totalExpense; // Diperbaiki dari baris yang terpotong
+        $netBalance = $totalIncome - $totalExpense;
 
         return view('transactions.index', compact('transactions', 'totalIncome', 'totalExpense', 'netBalance'));
     }
@@ -36,7 +36,7 @@ class TransactionController extends Controller
     }
 
     public function edit($id)
-    *   {
+    {
         $transaction = auth()->user()->transactions()->findOrFail($id);
         return view('transactions.edit', compact('transaction'));
     }
