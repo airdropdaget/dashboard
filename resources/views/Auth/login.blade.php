@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Sistem Administrasi Utama</title>
-    <!-- Menggunakan Tailwind CSS (via Vite/CDN) -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Tailwind CSS CDN (Langsung aktif tanpa build) -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-50 min-h-screen flex items-center justify-center p-4 font-sans antialiased selection:bg-amber-200">
 
@@ -19,10 +19,6 @@
         
         <!-- Bagian Kiri: Branding / Gambar Ilustrasi -->
         <div class="hidden md:flex md:w-1/2 bg-gradient-to-t from-amber-900 to-yellow-700 p-10 text-amber-50 flex-col justify-between relative overflow-hidden">
-            
-            <!-- Efek Pattern / Cahaya -->
-            <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMSI+PHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6bTIwIDIwaDIwdjIwSDIWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4=')]"></div>
-
             <div class="relative z-10">
                 <div class="flex items-center space-x-3 mb-6">
                     <div class="bg-amber-400 p-3 rounded-xl shadow-lg">
@@ -102,8 +98,6 @@
                         <input type="checkbox" name="remember" class="rounded border-slate-300 text-amber-600 focus:ring-amber-500">
                         <span>Ingat saya</span>
                     </label>
-                    <!-- Opsional: Link Lupa Password -->
-                    {{-- <a href="#" class="text-amber-700 hover:text-amber-600 font-medium">Lupa kata sandi?</a> --}}
                 </div>
 
                 <!-- Tombol Submit -->
