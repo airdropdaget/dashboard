@@ -8,32 +8,35 @@
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen">
 
-    <div class="flex h-screen overflow-hidden">
+    <div class="flex flex-col md:flex-row min-h-screen">
         
-        <!-- Sidebar dengan Menu Lengkap -->
-        <aside class="hidden md:flex md:w-64 bg-slate-900/80 backdrop-blur-xl border-r border-slate-800 flex-col shrink-0">
-            <div class="p-6 border-b border-slate-800 flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-2xl bg-amber-500 flex items-center justify-center text-slate-950 font-bold shadow-lg shadow-amber-500/20">KR</div>
-                <span class="font-bold text-lg text-white">Catatan</span>
+        <!-- Sidebar / Menu Navigasi Samping -->
+        <aside class="w-full md:w-64 bg-slate-900 border-b md:border-b-0 md:border-r border-slate-800 flex flex-col shrink-0">
+            <div class="p-6 border-b border-slate-800 flex items-center justify-between md:justify-start space-x-3">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-2xl bg-amber-500 flex items-center justify-center text-slate-950 font-bold shadow-lg">KR</div>
+                    <span class="font-bold text-lg text-white">Keuangan Rumah</span>
+                </div>
             </div>
             
-            <nav class="flex-1 p-4 space-y-2">
-                <a href="{{ route('dashboard') }}" class="flex items-center space-x-3 px-4 py-3 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-xl font-medium">
-                    <span>Dashboard Utama</span>
+            <!-- Menu Navigasi -->
+            <nav class="p-4 flex md:flex-col flex-wrap gap-2">
+                <a href="{{ route('dashboard') }}" class="flex-1 md:flex-none flex items-center space-x-3 px-4 py-3 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-xl font-medium text-sm">
+                    <span>Dashboard</span>
                 </a>
-                <a href="{{ route('transactions.index') }}" class="flex items-center space-x-3 px-4 py-3 text-slate-400 hover:bg-slate-800/60 rounded-xl transition">
-                    <span>Data Transaksi (Paging)</span>
+                <a href="{{ route('transactions.index') }}" class="flex-1 md:flex-none flex items-center space-x-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-xl transition text-sm">
+                    <span>Data & Paging</span>
                 </a>
-                <a href="{{ route('transactions.create') }}" class="flex items-center space-x-3 px-4 py-3 text-slate-400 hover:bg-slate-800/60 rounded-xl transition">
-                    <span>+ Input Transaksi Baru</span>
+                <a href="{{ route('transactions.create') }}" class="flex-1 md:flex-none flex items-center space-x-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-xl transition text-sm">
+                    <span>+ Input Transaksi</span>
                 </a>
             </nav>
 
-            <div class="p-4 border-t border-slate-800">
+            <div class="p-4 border-t border-slate-800 hidden md:block mt-auto">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit" class="w-full flex items-center space-x-3 px-4 py-3 text-rose-400 hover:bg-rose-500/10 rounded-xl transition">
-                        <span>Keluar</span>
+                    <button type="submit" class="w-full flex items-center justify-center space-x-2 px-4 py-3 text-rose-400 hover:bg-rose-500/10 rounded-xl transition text-sm">
+                        <span>Keluar Akun</span>
                     </button>
                 </form>
             </div>
@@ -45,7 +48,15 @@
             <!-- Header -->
             <header class="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-950/80 backdrop-blur sticky top-0 z-10">
                 <h1 class="text-xl font-bold text-white">Ringkasan Keuangan</h1>
-                <span class="text-sm text-slate-400">Halo, <strong class="text-white">{{ Auth::user()->name }}</strong></span>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-slate-400">Halo, <strong class="text-white">{{ Auth::user()->name }}</strong></span>
+                    <form method="POST" action="{{ route('logout') }}" class="inline">
+                        @csrf
+                        <button type="submit" class="px-3 py-1.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 rounded-lg text-xs font-medium transition">
+                            Keluar
+                        </button>
+                    </form>
+                </div>
             </header>
 
             <main class="p-6 sm:p-8 space-y-6 max-w-7xl w-full mx-auto">
