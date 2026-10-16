@@ -3,37 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Transaksi - Keuangan Rumah</title>
+    <title>Data Transaksi - Keuangan Rumah</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen">
 
-    <div class="flex h-screen overflow-hidden">
+    <div class="flex flex-col md:flex-row min-h-screen">
         
-        <!-- Sidebar Navigasi -->
-        <aside class="hidden md:flex md:w-64 bg-slate-900/80 backdrop-blur-xl border-r border-slate-800 flex-col shrink-0">
+        <!-- Sidebar / Menu Navigasi -->
+        <aside class="w-full md:w-64 bg-slate-900 border-b md:border-b-0 md:border-r border-slate-800 flex flex-col shrink-0">
             <div class="p-6 border-b border-slate-800 flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-2xl bg-amber-500 flex items-center justify-center text-slate-950 font-bold">KR</div>
+                <div class="w-10 h-10 rounded-2xl bg-amber-500 flex items-center justify-center text-slate-950 font-bold shadow-lg">KR</div>
                 <span class="font-bold text-lg text-white">Keuangan Rumah</span>
             </div>
             
-            <nav class="flex-1 p-4 space-y-2">
-                <a href="{{ route('dashboard') }}" class="flex items-center space-x-3 px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl transition">
-                    <span>Dashboard Utama</span>
+            <nav class="p-4 flex md:flex-col flex-wrap gap-2">
+                <a href="{{ route('dashboard') }}" class="flex-1 md:flex-none flex items-center space-x-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-xl transition text-sm">
+                    <span>Dashboard</span>
                 </a>
-                <a href="{{ route('transactions.index') }}" class="flex items-center space-x-3 px-4 py-3 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-xl font-medium">
-                    <span>Data Transaksi</span>
+                <a href="{{ route('transactions.index') }}" class="flex-1 md:flex-none flex items-center space-x-3 px-4 py-3 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-xl font-medium text-sm">
+                    <span>Data & Paging</span>
                 </a>
-                <a href="{{ route('transactions.create') }}" class="flex items-center space-x-3 px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl transition">
-                    <span>+ Input Transaksi Baru</span>
+                <a href="{{ route('transactions.create') }}" class="flex-1 md:flex-none flex items-center space-x-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-xl transition text-sm">
+                    <span>+ Input Transaksi</span>
                 </a>
             </nav>
 
-            <div class="p-4 border-t border-slate-800">
+            <div class="p-4 border-t border-slate-800 hidden md:block mt-auto">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit" class="w-full flex items-center space-x-3 px-4 py-3 text-rose-400 hover:bg-rose-500/10 rounded-xl transition">
-                        <span>Keluar</span>
+                    <button type="submit" class="w-full flex items-center justify-center space-x-2 px-4 py-3 text-rose-400 hover:bg-rose-500/10 rounded-xl transition text-sm">
+                        <span>Keluar Akun</span>
                     </button>
                 </form>
             </div>
@@ -43,9 +43,12 @@
         <div class="flex-1 flex flex-col overflow-y-auto bg-slate-950">
             <header class="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-950/80 backdrop-blur sticky top-0 z-10">
                 <h1 class="text-xl font-bold text-white">Kelola Data Transaksi</h1>
-                <a href="{{ route('transactions.create') }}" class="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-sm transition shadow-lg shadow-amber-500/20">
-                    + Tambah Transaksi
-                </a>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-slate-400 hidden sm:inline">Halo, <strong class="text-white">{{ Auth::user()->name }}</strong></span>
+                    <a href="{{ route('transactions.create') }}" class="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-sm transition shadow-lg">
+                        + Tambah
+                    </a>
+                </div>
             </header>
 
             <main class="p-6 sm:p-8 space-y-6 max-w-7xl w-full mx-auto">
@@ -87,11 +90,9 @@
                                         </td>
                                         <td class="p-5 text-center">
                                             <div class="flex items-center justify-center space-x-2">
-                                                <!-- Tombol Edit -->
                                                 <a href="{{ route('transactions.edit', $t->id) }}" class="px-3 py-1.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 rounded-lg text-xs font-medium transition">
                                                     Edit
                                                 </a>
-                                                <!-- Tombol Hapus -->
                                                 <form action="{{ route('transactions.destroy', $t->id) }}" method="POST" onsubmit="return confirm('Hapus transaksi ini?')">
                                                     @csrf
                                                     @method('DELETE')
