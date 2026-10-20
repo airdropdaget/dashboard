@@ -26,12 +26,12 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hash',
+            'password' => 'hashed', // Diperbarui dari 'hash' menjadi 'hashed'
         ];
     }
 
     /**
-     * TAMBAHKAN RELASI INI DI DALAM KELAS USER
+     * Relasi ke model Transaction
      */
     public function transactions()
     {
